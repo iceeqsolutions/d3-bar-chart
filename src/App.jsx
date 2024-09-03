@@ -80,7 +80,9 @@ function App() {
             y={yScale(d.Country)}
             width={xScale(d.Population)}
             height={yScale.bandwidth()}
-            fill={"white"}
+            fill={`rgb(${parseInt(Math.random() * 255)},${parseInt(
+              Math.random() * 255
+            )},${parseInt(Math.random() * 255)})`}
           />
         ))}
       </g>
