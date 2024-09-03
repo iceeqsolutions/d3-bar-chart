@@ -7,7 +7,7 @@ const csvUrl =
 
 const width = 960;
 const height = 500;
-const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+const margin = { top: 20, right: 20, bottom: 20, left: 200 };
 const innerWidth = width - margin.right - margin.left;
 const innerHeight = height - margin.top - margin.bottom;
 
@@ -33,11 +33,13 @@ function App() {
     .domain(data.map((d) => d.Country))
     .range([0, innerHeight]);
 
+  /* console.log(yScale.domain()); */
+
   const xScale = scaleLinear()
     .domain([0, max(data, (d) => d.Population)])
     .range([0, innerWidth]);
 
-  console.log(xScale.ticks());
+  /* console.log(xScale.ticks()); */
 
   return (
     <svg height={height} width={width}>
@@ -47,7 +49,9 @@ function App() {
             <line x1={0} y1={0} x2={0} y2={innerHeight} stroke="white" />
             <text
               dy=".71em"
-              y={innerHeight}
+              y={
+                innerHeight + 6
+              } /* Add some extra space to make it less crammed */
               x="0"
               style={{ textAnchor: "middle", stroke: "white" }}
             >
@@ -55,6 +59,20 @@ function App() {
             </text>
           </g>
         ))}
+
+        {yScale.domain().map((tick, i) => (
+          <g key={i} transform={`translate(0, ${yScale(tick)})`}>
+            {/* <line x1={innerWidth} y1={0} x2={0} y2={0} stroke="white" /> */}
+            <text
+              dy="2em"
+              x={-6}
+              style={{ textAnchor: "end", stroke: "white" }}
+            >
+              {tick}
+            </text>
+          </g>
+        ))}
+
         {data.map((d, i) => (
           <rect
             key={i}
