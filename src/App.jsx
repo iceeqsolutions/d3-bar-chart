@@ -37,9 +37,21 @@ function App() {
     .domain([0, max(data, (d) => d.Population)])
     .range([0, innerWidth]);
 
+  console.log(xScale.ticks());
+
   return (
     <svg height={height} width={width}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
+        {xScale.ticks().map((tick, i) => (
+          <line
+            key={i}
+            x1={xScale(tick)}
+            y1={0}
+            x2={xScale(tick)}
+            y2={height}
+            stroke="white"
+          />
+        ))}
         {data.map((d, i) => (
           <rect
             key={i}
