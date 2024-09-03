@@ -17,7 +17,9 @@ function App() {
       return d;
     };
 
-    csv(csvUrl, row).then(setData);
+    csv(csvUrl, row)
+      .then((data) => data.filter((d, i) => i < 10))
+      .then(setData);
   }, []);
 
   if (!data) {
@@ -33,7 +35,7 @@ function App() {
     .range([0, width]);
 
   return (
-    <svg>
+    <svg height={height} width={width}>
       {data.map((d, i) => (
         <rect
           key={i}
