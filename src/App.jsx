@@ -1,6 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { csv, scaleBand } from "d3";
+import { csv, max, scaleBand, scaleLinear } from "d3";
 
 const csvUrl =
   "https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv";
@@ -12,7 +12,12 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    csv(csvUrl).then(setData);
+    const row = (d) => {
+      d.Population = +d["2020"];
+      return d;
+    };
+
+    csv(csvUrl, row).then(setData);
   }, []);
 
   if (!data) {
@@ -20,12 +25,24 @@ function App() {
   }
 
   const yScale = scaleBand()
-    .domain(data.map(d => d.Country))
+    .domain(data.map((d) => d.Country))
     .range([0, height]);
-    
+
+  const xScale = scaleLinear()
+    .domain([0, max(data, (d) => d.Population)])
+    .range([0, width]);
+
   return (
     <svg>
-      {data.map(d => <rect x={0} y={yScale(d.Country)} width={} height={}/>)}
+      {data.map((d, i) => (
+        <rect
+          key={i}
+          x={0}
+          y={yScale(d.Country)}
+          width={xScale(d.Population)}
+          height={yScale.bandwidth()}
+        />
+      ))}
     </svg>
   );
 }
