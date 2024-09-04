@@ -1,10 +1,7 @@
 import "./App.css";
-/* import { useEffect, useState } from "react"; */
-import { /* csv,  */ max, scaleBand, scaleLinear } from "d3";
+import { max, scaleBand, scaleLinear } from "d3";
 import useData from "./assets/useData";
-
-/* const csvUrl =
-  "https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv"; */
+import AxisBottom from "./assets/AxisBottom";
 
 const width = 960;
 const height = 500;
@@ -14,19 +11,6 @@ const innerHeight = height - margin.top - margin.bottom;
 
 function App() {
   const data = useData();
-
-  /*   const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const row = (d) => {
-      d.Population = +d["2020"];
-      return d;
-    };
-
-    csv(csvUrl, row)
-      .then((data) => data.filter((d, i) => i < 10))
-      .then(setData);
-  }, []); */
 
   if (!data) {
     return <pre>Loading data...</pre>;
@@ -47,21 +31,22 @@ function App() {
   return (
     <svg height={height} width={width}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {xScale.ticks().map((tick, i) => (
+        {/* {xScale.ticks().map((tick, i) => (
           <g key={i} transform={`translate(${xScale(tick)}, 0)`}>
             <line x1={0} y1={0} x2={0} y2={innerHeight} stroke="white" />
             <text
               dy=".71em"
               y={
                 innerHeight + 6
-              } /* Add some extra space to make it less crammed */
+              }
               x="0"
               style={{ textAnchor: "middle", stroke: "white" }}
             >
               {tick}
             </text>
           </g>
-        ))}
+        ))} */}
+        <AxisBottom xScale={xScale} innerHeight={innerHeight} />
 
         {yScale.domain().map((tick, i) => (
           <g key={i} transform={`translate(0, ${yScale(tick)})`}>
