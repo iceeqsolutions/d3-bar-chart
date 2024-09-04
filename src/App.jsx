@@ -18,14 +18,15 @@ function App() {
     return <pre>Loading data...</pre>;
   }
 
-  const yScale = scaleBand()
-    .domain(data.map((d) => d.Country))
-    .range([0, innerHeight]);
+  const yValue = (d) => d.Country;
+  const xValue = (d) => d.Population;
+
+  const yScale = scaleBand().domain(data.map(yValue)).range([0, innerHeight]);
 
   /* console.log(yScale.domain()); */
 
   const xScale = scaleLinear()
-    .domain([0, max(data, (d) => d.Population)])
+    .domain([0, max(data, xValue)])
     .range([0, innerWidth]);
 
   /* console.log(xScale.ticks()); */
@@ -35,19 +36,13 @@ function App() {
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <AxisBottom xScale={xScale} innerHeight={innerHeight} />
         <AxisLeft yScale={yScale} innerWidth={innerWidth} />
-        <DataMarks data={data} xScale={xScale} yScale={yScale} />
-        {/* {data.map((d, i) => (
-          <rect
-            key={i}
-            x={0}
-            y={yScale(d.Country)}
-            width={xScale(d.Population)}
-            height={yScale.bandwidth()}
-            fill={`rgb(${parseInt(Math.random() * 255)},${parseInt(
-              Math.random() * 255
-            )},${parseInt(Math.random() * 255)})`}
-          />
-        ))} */}
+        <DataMarks
+          data={data}
+          xScale={xScale}
+          yScale={yScale}
+          xValue={xValue}
+          yValue={yValue}
+        />
       </g>
     </svg>
   );
