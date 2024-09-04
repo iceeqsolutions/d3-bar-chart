@@ -1,9 +1,10 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-import { csv, max, scaleBand, scaleLinear } from "d3";
+/* import { useEffect, useState } from "react"; */
+import { /* csv,  */ max, scaleBand, scaleLinear } from "d3";
+import useData from "./assets/useData";
 
-const csvUrl =
-  "https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv";
+/* const csvUrl =
+  "https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv"; */
 
 const width = 960;
 const height = 500;
@@ -12,7 +13,9 @@ const innerWidth = width - margin.right - margin.left;
 const innerHeight = height - margin.top - margin.bottom;
 
 function App() {
-  const [data, setData] = useState(null);
+  const data = useData();
+
+  /*   const [data, setData] = useState(null);
 
   useEffect(() => {
     const row = (d) => {
@@ -23,7 +26,7 @@ function App() {
     csv(csvUrl, row)
       .then((data) => data.filter((d, i) => i < 10))
       .then(setData);
-  }, []);
+  }, []); */
 
   if (!data) {
     return <pre>Loading data...</pre>;
