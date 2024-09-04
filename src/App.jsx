@@ -2,6 +2,7 @@ import "./App.css";
 import { max, scaleBand, scaleLinear } from "d3";
 import useData from "./assets/useData";
 import AxisBottom from "./assets/AxisBottom";
+import AxisLeft from "./assets/AxisLeft";
 
 const width = 960;
 const height = 500;
@@ -31,27 +32,13 @@ function App() {
   return (
     <svg height={height} width={width}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {/* {xScale.ticks().map((tick, i) => (
-          <g key={i} transform={`translate(${xScale(tick)}, 0)`}>
-            <line x1={0} y1={0} x2={0} y2={innerHeight} stroke="white" />
-            <text
-              dy=".71em"
-              y={
-                innerHeight + 6
-              }
-              x="0"
-              style={{ textAnchor: "middle", stroke: "white" }}
-            >
-              {tick}
-            </text>
-          </g>
-        ))} */}
         <AxisBottom xScale={xScale} innerHeight={innerHeight} />
+        <AxisLeft yScale={yScale} innerWidth={innerWidth} />
 
-        {yScale.domain().map((tick, i) => (
-          <g key={i} transform={`translate(0, ${yScale(tick)})`}>
-            {/* <line x1={innerWidth} y1={0} x2={0} y2={0} stroke="white" /> */}
-            <text
+        {/* {yScale.domain().map((tick, i) => (
+          <g key={i} transform={`translate(0, ${yScale(tick)})`}> */}
+        {/* <line x1={innerWidth} y1={0} x2={0} y2={0} stroke="white" /> */}
+        {/* <text
               dy="2em"
               x={-6}
               style={{ textAnchor: "end", stroke: "white" }}
@@ -59,7 +46,7 @@ function App() {
               {tick}
             </text>
           </g>
-        ))}
+        ))} */}
 
         {data.map((d, i) => (
           <rect
