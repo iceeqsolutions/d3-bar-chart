@@ -3,6 +3,7 @@ import { max, scaleBand, scaleLinear } from "d3";
 import useData from "./assets/useData";
 import AxisBottom from "./assets/AxisBottom";
 import AxisLeft from "./assets/AxisLeft";
+import DataMarks from "./assets/DataMarks";
 
 const width = 960;
 const height = 500;
@@ -34,21 +35,8 @@ function App() {
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <AxisBottom xScale={xScale} innerHeight={innerHeight} />
         <AxisLeft yScale={yScale} innerWidth={innerWidth} />
-
-        {/* {yScale.domain().map((tick, i) => (
-          <g key={i} transform={`translate(0, ${yScale(tick)})`}> */}
-        {/* <line x1={innerWidth} y1={0} x2={0} y2={0} stroke="white" /> */}
-        {/* <text
-              dy="2em"
-              x={-6}
-              style={{ textAnchor: "end", stroke: "white" }}
-            >
-              {tick}
-            </text>
-          </g>
-        ))} */}
-
-        {data.map((d, i) => (
+        <DataMarks data={data} xScale={xScale} yScale={yScale} />
+        {/* {data.map((d, i) => (
           <rect
             key={i}
             x={0}
@@ -59,7 +47,7 @@ function App() {
               Math.random() * 255
             )},${parseInt(Math.random() * 255)})`}
           />
-        ))}
+        ))} */}
       </g>
     </svg>
   );
