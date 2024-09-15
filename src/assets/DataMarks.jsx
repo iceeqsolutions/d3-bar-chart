@@ -1,3 +1,5 @@
+import colorList from "./colorList";
+
 const DataMarks = ({ data, xScale, yScale, xValue, yValue }) => {
   return data.map((d, i) => (
     <rect
@@ -6,9 +8,10 @@ const DataMarks = ({ data, xScale, yScale, xValue, yValue }) => {
       y={yScale(yValue(d))}
       width={xScale(xValue(d))}
       height={yScale.bandwidth()}
-      fill={`rgb(${parseInt(Math.random() * 255)},${parseInt(
-        Math.random() * 255
-      )},${parseInt(Math.random() * 255)})`}
+      // fill={`rgb(${parseInt(Math.random() * 255)},${parseInt(
+      //   Math.random() * 255
+      // )},${parseInt(Math.random() * 255)})`}
+      fill={colorList()[i]}
     />
   ));
 };

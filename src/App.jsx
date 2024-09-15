@@ -1,15 +1,26 @@
 import "./App.css";
 import { max, scaleBand, scaleLinear } from "d3";
-import useData from "./assets/useData";
+import { width, height, useData } from "./assets/useData";
 import AxisBottom from "./assets/AxisBottom";
 import AxisLeft from "./assets/AxisLeft";
 import DataMarks from "./assets/DataMarks";
 
-const width = 960;
-const height = 500;
 const margin = { top: 20, right: 20, bottom: 20, left: 200 };
 const innerWidth = width - margin.right - margin.left;
 const innerHeight = height - margin.top - margin.bottom;
+
+/* const colorGenerator = () => {
+  let colorMap = [];
+  for (let i = 0; i < 200; i++) {
+    const fill = `rgb(${parseInt(Math.random() * 255)},${parseInt(
+      Math.random() * 255
+    )},${parseInt(Math.random() * 255)})`;
+    colorMap.push(fill);
+  }
+  console.log(colorMap);
+};
+
+colorGenerator(); */
 
 function App() {
   const data = useData();
