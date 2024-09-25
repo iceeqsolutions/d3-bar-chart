@@ -1,7 +1,7 @@
 import { height, countryListSize } from "./useData";
 
 const dyValue = (height / countryListSize) * 0.6;
-console.log(dyValue);
+// console.log(dyValue);
 const AxisLeft = ({ yScale /* , innerWidth */ }) => {
   return yScale.domain().map((tick, i) => (
     <g key={i} transform={`translate(0, ${yScale(tick)})`}>
