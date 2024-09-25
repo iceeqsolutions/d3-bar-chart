@@ -19,7 +19,7 @@ function App() {
   const filteredData = data.filter((d, i) => i < coutriesAsNumbers);
   const width = 960;
   const height = 500 + (coutriesAsNumbers - 10) * 30;
-  const margin = { top: 20, right: 20, bottom: 20, left: 200 };
+  const margin = { top: 20, right: 20, bottom: 20, left: 240 };
   const innerWidth = width - margin.right - margin.left;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -40,38 +40,40 @@ function App() {
 
   return (
     <>
-      <form>
-        <label>
-          Set Number of Countries:
-          <input
-            type="number"
-            id="countryListSize"
-            name="countryListSize"
-            min="1"
-            max="235"
-            placeholder="20"
-            onChange={handleChange}
-          />
-        </label>
-      </form>
-      <svg height={height} width={width}>
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <AxisBottom xScale={xScale} innerHeight={innerHeight} />
-          <AxisLeft
-            yScale={yScale}
-            innerWidth={innerWidth}
-            coutriesAsNumbers={coutriesAsNumbers}
-            height={height}
-          />
-          <DataMarks
-            data={filteredData}
-            xScale={xScale}
-            yScale={yScale}
-            xValue={xValue}
-            yValue={yValue}
-          />
-        </g>
-      </svg>
+      <div className="svgCanvas">
+        <form>
+          <label>
+            Set Number of Countries:
+            <input
+              type="number"
+              id="countryListSize"
+              name="countryListSize"
+              min="1"
+              max="235"
+              placeholder="20"
+              onChange={handleChange}
+            />
+          </label>
+        </form>
+        <svg height={height} width={width}>
+          <g transform={`translate(${margin.left}, ${margin.top})`}>
+            <AxisBottom xScale={xScale} innerHeight={innerHeight} />
+            <AxisLeft
+              yScale={yScale}
+              innerWidth={innerWidth}
+              coutriesAsNumbers={coutriesAsNumbers}
+              height={height}
+            />
+            <DataMarks
+              data={filteredData}
+              xScale={xScale}
+              yScale={yScale}
+              xValue={xValue}
+              yValue={yValue}
+            />
+          </g>
+        </svg>
+      </div>
     </>
   );
 }
