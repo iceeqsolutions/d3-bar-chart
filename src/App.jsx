@@ -41,6 +41,7 @@ function App() {
   return (
     <>
       <div className="svgCanvas">
+        <h2>Population by Country</h2>
         <form>
           <label>
             Set Number of Countries:
